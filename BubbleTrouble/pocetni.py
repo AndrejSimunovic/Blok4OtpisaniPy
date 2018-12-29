@@ -1,30 +1,28 @@
 import sys
 
 from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtCore import Qt, QSize,QTimer
+from PyQt5.QtCore import Qt, QSize, QTimer
 from PyQt5.QtGui import QPixmap, QImage, QPalette, QBrush
-from PyQt5.QtWidgets import QWidget, QLabel, QApplication
+from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow
 
 from key_notifier import KeyNotifier
 
 
-class SimMoveDemo(QWidget):
-
+class SimMoveDemo(QMainWindow):
 
     def __init__(self):
         super().__init__()
 
         pix11 = QPixmap('player.png')
         pix22 = QPixmap('player2.png')
-        #pix33 = QPixmap('arrow.png')
-        #pix44 = QPixmap('arrow.png')
-		self.labelispis = QLabel(self)
-		
-		elf.label3 = QLabel(self)
+        # pix33 = QPixmap('arrow.png')
+        # pix44 = QPixmap('arrow.png')
+        self.labelispis = QLabel(self)
+
+        self.label3 = QLabel(self)
         self.label4 = QLabel(self)
         self.label1 = QLabel(self)
         self.label2 = QLabel(self)
-        
 
         self.timerP1 = QTimer(self)
         self.timerP1.setInterval(2000)
@@ -42,10 +40,10 @@ class SimMoveDemo(QWidget):
         self.pix2 = pix22.scaledToHeight(204)
         self.pix2 = pix22.scaledToWidth(34)
 
-        #self.pix3 = pix33.scaledToHeight(200)
-        #self.pix3 = pix33.scaledToWidth(5)
-        #self.pix4 = pix44.scaledToHeight(200)
-        #self.pix4 = pix44.scaledToWidth(5)
+        # self.pix3 = pix33.scaledToHeight(200)
+        # self.pix3 = pix33.scaledToWidth(5)
+        # self.pix4 = pix44.scaledToHeight(200)
+        # self.pix4 = pix44.scaledToWidth(5)
 
         palette = QPalette()
         sImage = oImage.scaled(QSize(1920, 1080))
@@ -60,13 +58,13 @@ class SimMoveDemo(QWidget):
         self.key_notifier.start()
 
     def __init_ui__(self):
-		font = QtGui.QFont()
+        font = QtGui.QFont()
         font.setPointSize(40)
 
         self.labelispis.setFont(font)
-        self.labelispis.resize(100000,100)
-        self.labelispis.setGeometry(1500,940,400,200)
-		
+        self.labelispis.resize(100000, 100)
+        self.labelispis.setGeometry(1500, 940, 400, 200)
+
         self.label1.setPixmap(self.pix1)
         self.label1.setGeometry(1000, 900, 50, 50)
 
@@ -85,6 +83,11 @@ class SimMoveDemo(QWidget):
         self.label4.setPixmap(self.pixmap)
         self.label4.hide()
 
+        x = 'Player1:'
+        y = 'Player2:'
+        score1 = 10
+        score2 = 50000
+
         self.statusBar().setFont(font)
         self.labelispis.setText(str(x) + str(score1))
         self.statusBar().showMessage(str(y) + str(score2))
@@ -98,7 +101,6 @@ class SimMoveDemo(QWidget):
     def keyReleaseEvent(self, event):
         self.key_notifier.rem_key(event.key())
 
-
     def __update_position__(self, key):
         rec1 = self.label1.geometry()
         rec2 = self.label2.geometry()
@@ -111,7 +113,7 @@ class SimMoveDemo(QWidget):
         elif key == Qt.Key_Up:
             if not self.timerP1.isActive():
                 self.label3.show()
-                self.label3.setGeometry(rec1.x() + 15, rec1.y() - 900 , rec3.width(),rec3.height())
+                self.label3.setGeometry(rec1.x() + 15, rec1.y() - 900, rec3.width(), rec3.height())
                 self.timerP1.start()
                 self.timerP1.timeout.connect(self.hideArrow1)
         elif key == Qt.Key_Left:
@@ -124,7 +126,7 @@ class SimMoveDemo(QWidget):
         elif key == Qt.Key_W:
             if not self.timerP2.isActive():
                 self.label4.show()
-                self.label4.setGeometry(rec2.x() + 15, rec2.y() - 900 , rec4.width(),rec4.height())
+                self.label4.setGeometry(rec2.x() + 15, rec2.y() - 900, rec4.width(), rec4.height())
                 self.timerP2.start()
                 self.timerP2.timeout.connect(self.hideArrow2)
         elif key == Qt.Key_A:
@@ -139,6 +141,7 @@ class SimMoveDemo(QWidget):
 
     def hideArrow1(self):
         self.label3.hide()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
