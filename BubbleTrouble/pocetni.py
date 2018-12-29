@@ -6,6 +6,7 @@ from PyQt5.QtGui import QPixmap, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow
 
 from key_notifier import KeyNotifier
+from ballMovement import BallMovement
 
 
 class SimMoveDemo(QMainWindow):
@@ -17,12 +18,14 @@ class SimMoveDemo(QMainWindow):
         pix22 = QPixmap('player2.png')
         # pix33 = QPixmap('arrow.png')
         # pix44 = QPixmap('arrow.png')
+        pix55 = QPixmap('ball.png')
         self.labelispis = QLabel(self)
 
         self.label3 = QLabel(self)
         self.label4 = QLabel(self)
         self.label1 = QLabel(self)
         self.label2 = QLabel(self)
+        self.label5 = QLabel(self)
 
         self.timerP1 = QTimer(self)
         self.timerP1.setInterval(2000)
@@ -34,12 +37,18 @@ class SimMoveDemo(QMainWindow):
 
         oImage = QImage("fantasy_border.png")
 
+        self.hitFloor = False
+        self.hitSide = False
+        
         self.pix1 = pix11.scaledToHeight(84)
         self.pix1 = pix11.scaledToWidth(34)
 
         self.pix2 = pix22.scaledToHeight(204)
         self.pix2 = pix22.scaledToWidth(34)
 
+		self.pix5 = pix55.scaledToHeight(384)
+        self.pix5 = pix55.scaledToWidth(54)
+		
         # self.pix3 = pix33.scaledToHeight(200)
         # self.pix3 = pix33.scaledToWidth(5)
         # self.pix4 = pix44.scaledToHeight(200)
@@ -57,6 +66,11 @@ class SimMoveDemo(QMainWindow):
         self.key_notifier.key_signal.connect(self.__update_position__)
         self.key_notifier.start()
 
+		
+        self.ballMovement = BallMovement()
+        self.ballMovement.ballMovementSignal.connect(self.moveBall)
+        self.ballMovement.start()
+		
     def __init_ui__(self):
         font = QtGui.QFont()
         font.setPointSize(40)
@@ -71,6 +85,10 @@ class SimMoveDemo(QMainWindow):
         self.label2.setPixmap(self.pix2)
         self.label2.setGeometry(900, 900, 50, 50)
 
+		
+        self.label5.setPixmap(self.pix5)
+        self.label5.setGeometry(50, 50, 50, 50)
+		
         self.label3.resize(8, 900)
         pixmap1 = QtGui.QPixmap('arrow.png')
         self.pixmap = pixmap1.scaled(8, 900)
@@ -132,6 +150,30 @@ class SimMoveDemo(QMainWindow):
         elif key == Qt.Key_A:
             if rec2.x() > 15:
                 self.label2.setGeometry(rec2.x() - 15, rec2.y(), rec2.width(), rec2.height())
+				
+	def moveBall(self):
+        rec5 = self.label5.geometry()
+
+        if (rec5.y() == 900):
+            self.hitFloor = True
+        elif (rec5.y() == 0):
+            self.hitFloor = False
+
+        if (rec5.x() == 1880):
+            self.hitSide = True
+        elif (rec5.x() == 0):
+            self.hitSide = False
+
+        if self.hitSide and not self.hitFloor:
+            self.label5.setGeometry(rec5.x() - 10, rec5.y() + 10, rec5.width(), rec5.height())
+        elif not self.hitSide and self.hitFloor:
+            self.label5.setGeometry(rec5.x() + 10, rec5.y() - 10, rec5.width(), rec5.height())
+        elif not self.hitFloor and not self.hitSide:
+            self.label5.setGeometry(rec5.x() + 10, rec5.y() + 10, rec5.width(), rec5.height())
+        elif self.hitSide and self.hitFloor:
+            self.label5.setGeometry(rec5.x() - 10, rec5.y() - 10, rec5.width(), rec5.height())
+
+
 
     def closeEvent(self, event):
         self.key_notifier.die()
