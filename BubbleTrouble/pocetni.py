@@ -18,11 +18,13 @@ class SimMoveDemo(QWidget):
         pix22 = QPixmap('player2.png')
         #pix33 = QPixmap('arrow.png')
         #pix44 = QPixmap('arrow.png')
-
+		self.labelispis = QLabel(self)
+		
+		elf.label3 = QLabel(self)
+        self.label4 = QLabel(self)
         self.label1 = QLabel(self)
         self.label2 = QLabel(self)
-        self.label3 = QLabel(self)
-        self.label4 = QLabel(self)
+        
 
         self.timerP1 = QTimer(self)
         self.timerP1.setInterval(2000)
@@ -58,7 +60,13 @@ class SimMoveDemo(QWidget):
         self.key_notifier.start()
 
     def __init_ui__(self):
+		font = QtGui.QFont()
+        font.setPointSize(40)
 
+        self.labelispis.setFont(font)
+        self.labelispis.resize(100000,100)
+        self.labelispis.setGeometry(1500,940,400,200)
+		
         self.label1.setPixmap(self.pix1)
         self.label1.setGeometry(1000, 900, 50, 50)
 
@@ -77,7 +85,10 @@ class SimMoveDemo(QWidget):
         self.label4.setPixmap(self.pixmap)
         self.label4.hide()
 
-        self.setWindowTitle('Sim Slide')
+        self.statusBar().setFont(font)
+        self.labelispis.setText(str(x) + str(score1))
+        self.statusBar().showMessage(str(y) + str(score2))
+        self.setWindowTitle('BubbleTrouble')
 
         self.show()
 
