@@ -5,11 +5,12 @@ import time
 
 class ArrowMovement(QObject):
 
-    arrowMovementSignal = pyqtSignal()
+    arrowMovementSignal = pyqtSignal(list)
 
     def __init__(self):
         super().__init__()
 
+        self.lista = []
         self.is_done = False
 
         self.thread = QThread()
@@ -32,11 +33,14 @@ class ArrowMovement(QObject):
         self.is_done = True
         self.thread.quit()
 
+    def add_list(self, num):
+        self.lista.append(num)
+
     @pyqtSlot()
     def __work__(self):
         """
         A slot with no params.
         """
         while not self.is_done:
-            self.arrowMovementSignal.emit()
+            self.arrowMovementSignal.emit(self.lista)
             time.sleep(0.05)

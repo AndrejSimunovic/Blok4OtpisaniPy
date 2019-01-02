@@ -152,7 +152,12 @@ class SimMoveDemo(QMainWindow):
                 self.label1.setGeometry(rec1.x() + 15, rec1.y(), rec1.width(), rec1.height())
         elif key == Qt.Key_Up:
             if self.arr1hidden:
+                geometrija = self.label1.geometry()
+                broj1 = geometrija.x()
+                broj2 = geometrija.y()
                 self.arrowMovement = ArrowMovement()
+                self.arrowMovement.add_list(broj1)
+                self.arrowMovement.add_list(broj2)
                 self.arrowMovement.arrowMovementSignal.connect(self.arrowMove)
                 self.arrowMovement.start()
         elif key == Qt.Key_Left:
@@ -163,7 +168,12 @@ class SimMoveDemo(QMainWindow):
                 self.label2.setGeometry(rec2.x() + 15, rec2.y(), rec2.width(), rec2.height())
         elif key == Qt.Key_W:
             if self.arr2hidden:
+                geometrija = self.label2.geometry()
+                broj1 = geometrija.x()
+                broj2 = geometrija.y()
                 self.arrowMovement2 = ArrowMovement()
+                self.arrowMovement2.add_list(broj1)
+                self.arrowMovement2.add_list(broj2)
                 self.arrowMovement2.arrowMovementSignal.connect(self.arrowMove2)
                 self.arrowMovement2.start()
         elif key == Qt.Key_A:
@@ -190,25 +200,31 @@ class SimMoveDemo(QMainWindow):
         elif self.hitSide and self.hitFloor:
             self.label5.setGeometry(rec5.x() - 10, rec5.y() - 10, rec5.width(), rec5.height())
 
-    def arrowMove(self):
+    def arrowMove(self, lista):
         self.arr1hidden = False
         rec3 = self.label3.geometry()
         rec1 = self.label1.geometry()
         self.label3.show()
+
+        broj1 = lista[0]
+        broj2 = lista[1]
         if (self.arr1h != 900):
             self.arr1h += 10
-            self.label3.setGeometry(rec1.x() + 15, rec1.y() - self.arr1h, rec3.width(), rec3.height())
+            self.label3.setGeometry(broj1 + 15, broj2 - self.arr1h, rec3.width(), rec3.height())
         else:
             self.hideArrow1()
 
-    def arrowMove2(self):
+    def arrowMove2(self, lista):
         self.arr2hidden = False
         rec3 = self.label4.geometry()
         rec1 = self.label2.geometry()
         self.label4.show()
+
+        broj1 = lista[0]
+        broj2 = lista[1]
         if (self.arr2h != 900):
             self.arr2h += 10
-            self.label4.setGeometry(rec1.x() + 15, rec1.y() - self.arr2h, rec3.width(), rec3.height())
+            self.label4.setGeometry(broj1 + 15, broj2 - self.arr2h, rec3.width(), rec3.height())
         else:
             self.hideArrow2()
 
