@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow
 from key_notifier import KeyNotifier
 from ballMovement import BallMovement
 from hitBall import HitBall
+from arrowMovement import ArrowMovement
 
 
 class SimMoveDemo(QMainWindow):
@@ -42,6 +43,12 @@ class SimMoveDemo(QMainWindow):
 
         self.hitFloor = False
         self.hitSide = False
+
+        self.arr1h = 10
+        self.arr2h = 10
+
+        self.arr1hidden = True
+        self.arr2hidden = True
 
         self.pix1 = pix11.scaledToHeight(84)
         self.pix1 = pix11.scaledToWidth(34)
@@ -137,43 +144,38 @@ class SimMoveDemo(QMainWindow):
     def __update_position__(self, key):
         rec1 = self.label1.geometry()
         rec2 = self.label2.geometry()
-        rec3 = self.label3.geometry()
-        rec4 = self.label4.geometry()
+        #rec3 = self.label3.geometry()
+        #rec4 = self.label4.geometry()
 
         if key == Qt.Key_Right:
             if rec1.x() < 1880:
                 self.label1.setGeometry(rec1.x() + 15, rec1.y(), rec1.width(), rec1.height())
         elif key == Qt.Key_Up:
-            if not self.timerP1.isActive():
-                self.label3.show()
-                self.label3.setGeometry(rec1.x() + 15, rec1.y() - 900, rec3.width(), rec3.height())
-                self.timerP1.start()
-                self.timerP1.timeout.connect(self.hideArrow1)
+            if self.arr1hidden:
+                self.arrowMovement = ArrowMovement()
+                self.arrowMovement.arrowMovementSignal.connect(self.arrowMove)
+                self.arrowMovement.start()
         elif key == Qt.Key_Left:
             if rec1.x() > 15:
                 self.label1.setGeometry(rec1.x() - 15, rec1.y(), rec1.width(), rec1.height())
-
         if key == Qt.Key_D:
             if rec2.x() < 1880:
                 self.label2.setGeometry(rec2.x() + 15, rec2.y(), rec2.width(), rec2.height())
         elif key == Qt.Key_W:
-            if not self.timerP2.isActive():
-                self.label4.show()
-                self.label4.setGeometry(rec2.x() + 15, rec2.y() - 900, rec4.width(), rec4.height())
-                self.timerP2.start()
-                self.timerP2.timeout.connect(self.hideArrow2)
+            if self.arr2hidden:
+                self.arrowMovement2 = ArrowMovement()
+                self.arrowMovement2.arrowMovementSignal.connect(self.arrowMove2)
+                self.arrowMovement2.start()
         elif key == Qt.Key_A:
             if rec2.x() > 15:
                 self.label2.setGeometry(rec2.x() - 15, rec2.y(), rec2.width(), rec2.height())
 
     def moveBall(self):
         rec5 = self.label5.geometry()
-
         if (rec5.y() == 900):
             self.hitFloor = True
         elif (rec5.y() == 0):
             self.hitFloor = False
-
         if (rec5.x() == 1880):
             self.hitSide = True
         elif (rec5.x() == 0):
@@ -188,14 +190,42 @@ class SimMoveDemo(QMainWindow):
         elif self.hitSide and self.hitFloor:
             self.label5.setGeometry(rec5.x() - 10, rec5.y() - 10, rec5.width(), rec5.height())
 
+    def arrowMove(self):
+        self.arr1hidden = False
+        rec3 = self.label3.geometry()
+        rec1 = self.label1.geometry()
+        self.label3.show()
+        if (self.arr1h != 900):
+            self.arr1h += 10
+            self.label3.setGeometry(rec1.x() + 15, rec1.y() - self.arr1h, rec3.width(), rec3.height())
+        else:
+            self.hideArrow1()
+
+    def arrowMove2(self):
+        self.arr2hidden = False
+        rec3 = self.label4.geometry()
+        rec1 = self.label2.geometry()
+        self.label4.show()
+        if (self.arr2h != 900):
+            self.arr2h += 10
+            self.label4.setGeometry(rec1.x() + 15, rec1.y() - self.arr2h, rec3.width(), rec3.height())
+        else:
+            self.hideArrow2()
+
     def closeEvent(self, event):
         self.key_notifier.die()
 
     def hideArrow2(self):
         self.label4.hide()
+        self.arr2h = 10
+        self.arr2hidden = True
+        self.arrowMovement2.die()
 
     def hideArrow1(self):
         self.label3.hide()
+        self.arr1h = 10
+        self.arr1hidden = True
+        self.arrowMovement.die()
 
     def checkHit(self):
         ballPosition = self.label5.geometry()
