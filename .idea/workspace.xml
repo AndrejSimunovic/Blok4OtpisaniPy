@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="583664e1-139c-4311-b877-1f2360cba5b4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Blok4OtpisaniPy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Blok4OtpisaniPy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BubbleTrouble/arrowMovement.py" beforeDir="false" afterPath="$PROJECT_DIR$/BubbleTrouble/arrowMovement.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BubbleTrouble/pocetni.py" beforeDir="false" afterPath="$PROJECT_DIR$/BubbleTrouble/pocetni.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BubbleTrouble/pocetni.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+            <state relative-caret-position="272">
+              <caret line="235" column="31" selection-start-line="235" selection-start-column="31" selection-end-line="235" selection-end-column="31" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -41,15 +40,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BubbleTrouble/arrowMovement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357" />
+            <state relative-caret-position="340">
+              <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BubbleTrouble/hitBall.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="170">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
               </folding>
@@ -66,6 +67,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>add_list</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -73,6 +79,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/BubbleTrouble/hitBall.py" />
+        <option value="$PROJECT_DIR$/BubbleTrouble/hitBall2.py" />
+        <option value="$PROJECT_DIR$/BubbleTrouble/arrowMovement.py" />
         <option value="$PROJECT_DIR$/BubbleTrouble/pocetni.py" />
       </list>
     </option>
@@ -87,6 +95,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -103,7 +112,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -179,13 +187,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.123595506" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -206,6 +215,7 @@
     <entry file="file://$PROJECT_DIR$/BubbleTrouble/arrow.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/BubbleTrouble/hitBall2.py" />
     <entry file="file://$PROJECT_DIR$/BubbleTrouble/ballMovement.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -215,25 +225,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BubbleTrouble/arrowMovement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BubbleTrouble/hitBall.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="170">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BubbleTrouble/arrowMovement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="40" column="6" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BubbleTrouble/pocetni.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+        <state relative-caret-position="272">
+          <caret line="235" column="31" selection-start-line="235" selection-start-column="31" selection-end-line="235" selection-end-column="31" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

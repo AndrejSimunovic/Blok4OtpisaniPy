@@ -154,6 +154,7 @@ class SimMoveDemo(QMainWindow):
                 self.arrowMovement = ArrowMovement()
                 self.arrowMovement.add_list(broj1)
                 self.arrowMovement.add_list(broj2)
+                self.arrowMovement.ballX = broj1
                 self.arrowMovement.arrowMovementSignal.connect(self.arrowMove)
                 self.arrowMovement.start()
         elif key == Qt.Key_Left:
@@ -170,6 +171,7 @@ class SimMoveDemo(QMainWindow):
                 self.arrowMovement2 = ArrowMovement()
                 self.arrowMovement2.add_list(broj1)
                 self.arrowMovement2.add_list(broj2)
+                self.arrowMovement2.ballX = broj1
                 self.arrowMovement2.arrowMovementSignal.connect(self.arrowMove2)
                 self.arrowMovement2.start()
         elif key == Qt.Key_A:
@@ -213,6 +215,7 @@ class SimMoveDemo(QMainWindow):
 
         else:
             self.hideArrow1()
+            self.arrowMovement.ballX = None
 
     def arrowMove2(self, lista):
         self.arr2hidden = False
@@ -225,11 +228,12 @@ class SimMoveDemo(QMainWindow):
         if (self.arr2h != 900):
             self.arr2h += 10
             self.label4.setGeometry(broj1 + 15, broj2 - self.arr2h, rec3.width(), rec3.height())
-            self.hitBall = HitBall()
-            self.hitBall.hitBallSignal.connect(self.checkHit)
-            self.hitBall.start()
+            self.hitBall2 = HitBall()
+            self.hitBall2.hitBallSignal.connect(self.checkHit2)
+            self.hitBall2.start()
         else:
             self.hideArrow2()
+            self.arrowMovement2.ballX = None
 
     def closeEvent(self, event):
         self.key_notifier.die()
@@ -249,7 +253,14 @@ class SimMoveDemo(QMainWindow):
     def checkHit(self):
         ballPosition = self.label5.geometry()
 
-        if ballPosition.x() in self.arrowMovement.lista:
+        if ballPosition.x() == self.arrowMovement.ballX:
+            self.label5.hide()
+            self.ballMovement.is_done = True
+
+    def checkHit2(self):
+        ballPosition = self.label5.geometry()
+
+        if ballPosition.x() == self.arrowMovement2.ballX:
             self.label5.hide()
             self.ballMovement.is_done = True
 

@@ -11,6 +11,7 @@ class ArrowMovement(QObject):
         super().__init__()
 
         self.lista = []
+        self.ballX = None
         self.is_done = False
 
         self.thread = QThread()
@@ -35,6 +36,9 @@ class ArrowMovement(QObject):
 
     def add_list(self, num):
         self.lista.append(num)
+
+    #def add_ball_list(self, num):
+     #   self.ballList.append(num)
 
     @pyqtSlot()
     def __work__(self):
