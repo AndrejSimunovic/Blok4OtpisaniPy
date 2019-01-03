@@ -80,10 +80,6 @@ class SimMoveDemo(QMainWindow):
         self.ballMovement.ballMovementSignal.connect(self.moveBall)
         self.ballMovement.start()
 
-        self.hitBall = HitBall()
-        self.hitBall.hitBallSignal.connect(self.checkHit)
-        self.hitBall.start()
-
     def __init_ui__(self):
         font = QtGui.QFont()
         font.setPointSize(40)
@@ -211,6 +207,10 @@ class SimMoveDemo(QMainWindow):
         if (self.arr1h != 900):
             self.arr1h += 10
             self.label3.setGeometry(broj1 + 15, broj2 - self.arr1h, rec3.width(), rec3.height())
+            self.hitBall = HitBall()
+            self.hitBall.hitBallSignal.connect(self.checkHit)
+            self.hitBall.start()
+
         else:
             self.hideArrow1()
 
@@ -225,6 +225,9 @@ class SimMoveDemo(QMainWindow):
         if (self.arr2h != 900):
             self.arr2h += 10
             self.label4.setGeometry(broj1 + 15, broj2 - self.arr2h, rec3.width(), rec3.height())
+            self.hitBall = HitBall()
+            self.hitBall.hitBallSignal.connect(self.checkHit)
+            self.hitBall.start()
         else:
             self.hideArrow2()
 
@@ -245,12 +248,8 @@ class SimMoveDemo(QMainWindow):
 
     def checkHit(self):
         ballPosition = self.label5.geometry()
-        arrowPosition = self.label3.geometry()
 
-        if ballPosition.x() == arrowPosition.x():
-            self.label5.hide()
-            self.ballMovement.is_done = True
-        elif arrowPosition.x() == ballPosition.x():
+        if ballPosition.x() in self.arrowMovement.lista:
             self.label5.hide()
             self.ballMovement.is_done = True
 
