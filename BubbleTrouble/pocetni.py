@@ -3,13 +3,14 @@ import sys
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize, QTimer
 from PyQt5.QtGui import QPixmap, QImage, QPalette, QBrush
-from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow
+from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow, QVBoxLayout
 
 from key_notifier import KeyNotifier
 from ballMovement import BallMovement
 from hitBall import HitBall
 from arrowMovement import ArrowMovement
-
+from ball import Ball
+from addBall import AddBall
 
 class SimMoveDemo(QMainWindow):
 
@@ -44,6 +45,9 @@ class SimMoveDemo(QMainWindow):
         self.hitFloor = False
         self.hitSide = False
 
+        self.hitFloor2 = False
+        self.hitSide2 = False
+
         self.arr1h = 10
         self.arr2h = 10
 
@@ -72,6 +76,7 @@ class SimMoveDemo(QMainWindow):
         self.setWindowState(Qt.WindowFullScreen)
         self.__init_ui__()
 
+
         self.key_notifier = KeyNotifier()
         self.key_notifier.key_signal.connect(self.__update_position__)
         self.key_notifier.start()
@@ -80,9 +85,31 @@ class SimMoveDemo(QMainWindow):
         self.ballMovement.ballMovementSignal.connect(self.moveBall)
         self.ballMovement.start()
 
+        #self.v = QVBoxLayout()
+        self.loptaKlasa = Ball('ball.png', 2, 100, 100)
+        self.AddBall = AddBall()
+        self.AddBall.add_ball(self.loptaKlasa)
+        self.AddBall.ball_signal.connect(self.postaviLoptu)
+        self.AddBall.start()
+
+        self.ballMovement2 = BallMovement()
+        self.ballMovement2.ballMovementSignal.connect(self.loptaKlasa.moveBall)
+        self.ballMovement2.start()
+
     def __init_ui__(self):
         font = QtGui.QFont()
         font.setPointSize(40)
+
+        """"    OVO je za sad jedini nacin da se lopta pojavila 
+        self.lopta = QLabel(self)
+        Lopta = Ball('ball.png', 2, 100, 100)
+        Lopta.setSize(80, 80)
+        #self.lopta.showBall()
+        self.lopta = Lopta.labelBall
+        self.setCentralWidget(Lopta.labelBall)
+        
+        KORDINATE KRETANJA LOPTE TREBA POPRAVITI
+        """
 
         self.labelispis.setFont(font)
         self.labelispis.resize(100000, 100)
@@ -121,8 +148,8 @@ class SimMoveDemo(QMainWindow):
 
         x = 'Player1:'
         y = 'Player2:'
-        score1 = 10000
-        score2 = 50000
+        score1 = 1000
+        score2 = 5000
 
         self.statusBar().setFont(font)
         self.labelispis.setText(str(x) + str(score1))
@@ -157,6 +184,7 @@ class SimMoveDemo(QMainWindow):
                 self.arrowMovement.ballX = broj1
                 self.arrowMovement.arrowMovementSignal.connect(self.arrowMove)
                 self.arrowMovement.start()
+
         elif key == Qt.Key_Left:
             if rec1.x() > 15:
                 self.label1.setGeometry(rec1.x() - 15, rec1.y(), rec1.width(), rec1.height())
@@ -198,6 +226,26 @@ class SimMoveDemo(QMainWindow):
         elif self.hitSide and self.hitFloor:
             self.label5.setGeometry(rec5.x() - 10, rec5.y() - 10, rec5.width(), rec5.height())
 
+    def moveBall2(self):
+        rec5 = self.loptaKlasa.labelBall.geometry()
+        if (rec5.y() == 900):
+            self.hitFloor2 = True
+        elif (rec5.y() == 0):
+            self.hitFloor2 = False
+        if (rec5.x() == 1880):
+            self.hitSide2 = True
+        elif (rec5.x() == 0):
+            self.hitSide2 = False
+
+        if self.hitSide2 and not self.hitFloor2:
+            self.label5.setGeometry(rec5.x() - 10, rec5.y() + 10, rec5.width(), rec5.height())
+        elif not self.hitSide2 and self.hitFloor2:
+            self.label5.setGeometry(rec5.x() + 10, rec5.y() - 10, rec5.width(), rec5.height())
+        elif not self.hitFloor2 and not self.hitSide:
+            self.label5.setGeometry(rec5.x() + 10, rec5.y() + 10, rec5.width(), rec5.height())
+        elif self.hitSide2 and self.hitFloor2:
+            self.label5.setGeometry(rec5.x() - 10, rec5.y() - 10, rec5.width(), rec5.height())
+
     def arrowMove(self, lista):
         self.arr1hidden = False
         rec3 = self.label3.geometry()
@@ -212,7 +260,6 @@ class SimMoveDemo(QMainWindow):
             self.hitBall = HitBall()
             self.hitBall.hitBallSignal.connect(self.checkHit)
             self.hitBall.start()
-
         else:
             self.hideArrow1()
             self.arrowMovement.ballX = None
@@ -242,12 +289,14 @@ class SimMoveDemo(QMainWindow):
         self.label4.hide()
         self.arr2h = 10
         self.arr2hidden = True
+        self.arrowMovement2.is_done = True
         self.arrowMovement2.die()
 
     def hideArrow1(self):
         self.label3.hide()
         self.arr1h = 10
         self.arr1hidden = True
+        self.arrowMovement.is_done = True
         self.arrowMovement.die()
 
     def checkHit(self):
@@ -256,6 +305,7 @@ class SimMoveDemo(QMainWindow):
         if ballPosition.x() == self.arrowMovement.ballX:
             self.label5.hide()
             self.ballMovement.is_done = True
+            self.ballMovement.die()
 
     def checkHit2(self):
         ballPosition = self.label5.geometry()
@@ -263,7 +313,14 @@ class SimMoveDemo(QMainWindow):
         if ballPosition.x() == self.arrowMovement2.ballX:
             self.label5.hide()
             self.ballMovement.is_done = True
+            self.ballMovement.die()
 
+    def postaviLoptu(self, b):
+        self.setCentralWidget(b)
+        #self.v.addWidget(b)
+        self.AddBall.is_done = True
+        self.AddBall.die()
+        #self.b.move(500, 100)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

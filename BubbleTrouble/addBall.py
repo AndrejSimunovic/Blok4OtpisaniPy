@@ -3,15 +3,14 @@ from PyQt5.QtCore import QThread, QObject, pyqtSignal, pyqtSlot
 import time
 
 
-class ArrowMovement(QObject):
+class AddBall(QObject):
 
-    arrowMovementSignal = pyqtSignal(list)
+    ball_signal = pyqtSignal(object)
 
     def __init__(self):
         super().__init__()
 
-        self.lista = []
-        self.ballX = None
+        self.bals = []
         self.is_done = False
 
         self.thread = QThread()
@@ -27,6 +26,12 @@ class ArrowMovement(QObject):
         """
         self.thread.start()
 
+    def add_ball(self, b):
+        self.bals.append(b)
+
+    def rem_ball(self, b):
+        self.balls.remove(b)
+
     def die(self):
         """
         End notifications.
@@ -34,20 +39,12 @@ class ArrowMovement(QObject):
         self.is_done = True
         self.thread.quit()
 
-    def add_list(self, num):
-        self.lista.append(num)
-
-    def rem_list(self, num):
-        self.lista.remove(num)
-
-    #def add_ball_list(self, num):
-     #   self.ballList.append(num)
-
     @pyqtSlot()
     def __work__(self):
         """
         A slot with no params.
         """
         while not self.is_done:
-            self.arrowMovementSignal.emit(self.lista)
+            for b in self.bals:
+                self.ball_signal.emit(b)
             time.sleep(0.05)
