@@ -12,6 +12,7 @@ class ArrowMovement(QObject):
 
         self.lista = []
         self.ballX = None
+        self.ballY = []
         self.is_done = False
 
         self.thread = QThread()
@@ -50,4 +51,4 @@ class ArrowMovement(QObject):
         """
         while not self.is_done:
             self.arrowMovementSignal.emit(self.lista)
-            time.sleep(0.05)
+            time.sleep(0.03)

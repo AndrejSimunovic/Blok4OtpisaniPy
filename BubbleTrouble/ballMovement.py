@@ -32,6 +32,7 @@ class BallMovement(QObject):
         self.is_done = True
         self.thread.quit()
 
+
     @pyqtSlot()
     def __work__(self):
         """
@@ -39,4 +40,4 @@ class BallMovement(QObject):
         """
         while not self.is_done:
             self.ballMovementSignal.emit()
-            time.sleep(0.05)
+            time.sleep(0.02)
