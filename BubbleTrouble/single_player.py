@@ -12,12 +12,11 @@ from hitBall import HitBall
 from arrowMovement import ArrowMovement
 from ball import Ball
 from addBall import AddBall
-from single_player import SimMoveDemo1
 
 bolian = False
 
 
-class SimMoveDemo(QMainWindow):
+class SimMoveDemo1(QMainWindow):
 
     def __init__(self, zivot1, zivot2, poeni1, poeni2, slika, level, pic_no, speed):
         super().__init__()
@@ -139,7 +138,7 @@ class SimMoveDemo(QMainWindow):
         self.zivot2 = zivot2
         self.speed = speed
 
-        self.timerP1.start(5000)
+        self.timerP1.start(20000)
         self.timerP1.timeout.connect(self.timer_func)
 
         self.labelispis.setFont(font)
@@ -168,10 +167,10 @@ class SimMoveDemo(QMainWindow):
         self.labelPlayer1.setGeometry(1000, 900, 50, 50)
 
         self.labelPlayer2.setPixmap(self.pix2)
-        self.labelPlayer2.setGeometry(900, 900, 50, 50)
+        self.labelPlayer2.setGeometry(-900, -900, 50, 50)
 
         self.labelVelikaLopta.setPixmap(self.pix5)
-        self.labelVelikaLopta.setGeometry(50, 50, 60, 60)
+        self.labelVelikaLopta.setGeometry(50, 50, 50, 50)
 
         self.labelforce.setPixmap(self.pix7)
         self.labelforce.setGeometry(-100, 0, 0, 0)
@@ -216,10 +215,10 @@ class SimMoveDemo(QMainWindow):
 
         self.statusBar().setFont(font)
         self.labelispis.setText(str(self.x) + str(self.poeni1))
-        self.labelispis2.setText(str(self.y) + str(self.poeni2))
+        self.labelispis2.setText(" ")
         self.labellevel.setText(str(self.lev) + str(self.level))
         self.labelLives2.setText("Lives:" + str(self.lives1))
-        self.labelLives1.setText("Lives:" + str(self.lives2))
+        self.labelLives1.setText("")
         self.ex2 = None
         self.show()
 
@@ -299,20 +298,16 @@ class SimMoveDemo(QMainWindow):
                     self.ballMovement.die()
                     self.ballMovement3.die()
                     self.ballMovement4.die()
-
                     self.pbar.setValue(0)
-
-                    if(self.zivot1 == 0):
+                    if (self.zivot1 == 0):
                         self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                         self.labelPlayer2.setGeometry(-900, -900, 0, 0)
                         self.labelVelikaLopta.hide()
                         self.labelforce.hide()
                         self.zivot1 = 'LOSER'
-                        self.zivot2 = 'WINNER'
                     else:
                         self.close()
-                        self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                        #self.labelLives1.setText('Lives: ' + str(self.zivot2))
+                        self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
             if igrac2.x() + i == rec5.x():
                 if rec5.y() > 860 and rec5.y() < 900:
@@ -322,20 +317,13 @@ class SimMoveDemo(QMainWindow):
                     self.ballMovement3.die()
                     self.ballMovement4.die()
 
-                    if (self.zivot2 == 0):
-                        self.labelPlayer1.setGeometry(-900, -900, 0, 0)
-                        self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                        self.labelVelikaLopta.hide()
-                        self.labelforce.hide()
-                        self.zivot2 = 'LOSER'
-                        self.zivot1 = 'WINNER'
-                    else:
-                        self.close()
-                        self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                        #self.labelLives2.setText('Lives: ' + str(self.zivot1))
+                    self.key_notifier.die()
+
+                    self.close()
+                    self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
         self.labelLives2.setText('Lives: ' + str(self.zivot1))
-        self.labelLives1.setText('Lives: ' + str(self.zivot2))
+        #self.labelLives1.setText('Lives: ' + str(self.zivot2))
 
         if self.hitSideVelikaLopta and not self.hitFloorVelikaLopta:
             self.labelVelikaLopta.setGeometry(rec5.x() - 10, rec5.y() + 10, rec5.width(), rec5.height())
@@ -371,19 +359,15 @@ class SimMoveDemo(QMainWindow):
                         self.ballMovement4.die()
 
                         self.pbar.setValue(0)
-
                         if (self.zivot1 == 0):
                             self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                             self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelMalaLopticaDesna.hide()
-                            self.labelMalaLopticaLeva.hide()
+                            self.labelVelikaLopta.hide()
                             self.labelforce.hide()
                             self.zivot1 = 'LOSER'
-                            self.zivot2 = 'WINNER'
                         else:
                             self.close()
-                            self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                            #elf.labelLives2.setText('Lives: ' + str(self.zivot2))
+                            self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
                 if igrac2.x() + i == rec9.x():
                     if rec9.y() > 860 and rec9.y() < 900:
@@ -393,23 +377,13 @@ class SimMoveDemo(QMainWindow):
                         self.ballMovement.die()
                         self.ballMovement3.die()
                         self.ballMovement4.die()
+                        self.key_notifier.die()
+                        self.close()
                         self.pbar.setValue(0)
-
-                        if (self.zivot2 == 0):
-                            self.labelPlayer1.setGeometry(-900, -900, 0, 0)
-                            self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelMalaLopticaLeva.hide()
-                            self.labelMalaLopticaDesna.hide()
-                            self.labelforce.hide()
-                            self.zivot2 = 'LOSER'
-                            self.zivot1 = 'WINNER'
-                        else:
-                            self.close()
-                            self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                            #self.labelLives1.setText('Lives: ' + str(self.zivot1))
+                        self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
         self.labelLives2.setText('Lives: ' + str(self.zivot1))
-        self.labelLives1.setText('Lives: ' + str(self.zivot2))
+        #self.labelLives1.setText('Lives: ' + str(self.zivot2))
 
         if self.hitSideMalaLoptaDesna and not self.hitFloorMalaLopta1:
             self.labelMalaLopticaDesna.setGeometry(rec9.x() - 10, rec9.y() + 10, rec9.width(), rec9.height())
@@ -447,19 +421,15 @@ class SimMoveDemo(QMainWindow):
                         self.ballMovement4.die()
 
                         self.pbar.setValue(0)
-
                         if (self.zivot1 == 0):
                             self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                             self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelMalaLopticaDesna.hide()
-                            self.labelMalaLopticaLeva.hide()
+                            self.labelVelikaLopta.hide()
                             self.labelforce.hide()
                             self.zivot1 = 'LOSER'
-                            self.zivot2 = 'WINNER'
                         else:
                             self.close()
-                            self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                            #self.labelLives2.setText('Lives: ' + str(self.zivot2))
+                            self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
                 if igrac2.x() + i == rec6.x():
                     if rec6.y() > 860 and rec6.y() < 900:
@@ -469,24 +439,15 @@ class SimMoveDemo(QMainWindow):
                         self.ballMovement.die()
                         self.ballMovement3.die()
                         self.ballMovement4.die()
+                        self.key_notifier.die()
+
+                        self.close()
                         self.pbar.setValue(0)
+                        self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
-
-                        if (self.zivot2 == 0):
-                            self.labelPlayer1.setGeometry(-900, -900, 0, 0)
-                            self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelMalaLopticaLeva.hide()
-                            self.labelMalaLopticaDesna.hide()
-                            self.labelforce.hide()
-                            self.zivot2 = 'LOSER'
-                            self.zivot1 = 'WINNER'
-                        else:
-                            self.close()
-                            self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
-                            #self.labelLives1.setText('Lives: ' + str(self.zivot1))
 
         self.labelLives2.setText('Lives: ' + str(self.zivot1))
-        self.labelLives1.setText('Lives: ' + str(self.zivot2))
+        #3self.labelLives1.setText('Lives: ' + str(self.zivot2))
 
         if self.hitSideMalaLopta2 and not self.hitFloorMalaLopta2:
             self.labelMalaLopticaLeva.setGeometry(rec6.x() + 10, rec6.y() + 10, rec6.width(), rec6.height())
@@ -606,12 +567,12 @@ class SimMoveDemo(QMainWindow):
         x = random.randint(0, 1880)
         self.labelforce.setGeometry(x, 828, 400, 200)
         self.labelforce.show()
-        self.timerP2.start(2000)
+        self.timerP2.start(10000)
         self.timerP2.timeout.connect(self.hide_force)
 
     def hide_force(self):
         self.labelforce.hide()
-        self.labelforce.setGeometry(-100, 0, 0, 0)
+        self.labelforce.destroy()
 
 
     def checkForceHitFromLeft1(self):
@@ -626,7 +587,7 @@ class SimMoveDemo(QMainWindow):
                 self.p1_speed = 25
             else:
                 self.p1_speed = 5
-            self.timerSleep.start(5000)
+            self.timerSleep.start(10000)
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromRight1(self):
@@ -641,7 +602,7 @@ class SimMoveDemo(QMainWindow):
                 self.p1_speed = 25
             else:
                 self.p1_speed = 5
-            self.timerSleep.start(5000)
+            self.timerSleep.start(10000)
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromLeft2(self):
@@ -656,7 +617,7 @@ class SimMoveDemo(QMainWindow):
                 self.p2_speed = 25
             else:
                 self.p2_speed = 5
-            self.timerSleep2.start(5000)
+            self.timerSleep2.start(10000)
             self.timerSleep2.timeout.connect(self.p2_normal_speed)
 
     def checkForceHitFromRight2(self):
@@ -672,7 +633,7 @@ class SimMoveDemo(QMainWindow):
                 self.p2_speed = 25
             else:
                 self.p2_speed = 5
-            self.timerSleep2.start(5000)
+            self.timerSleep2.start(10000)
             self.timerSleep2.timeout.connect(self.p2_normal_speed)
 
     def p1_normal_speed(self):
@@ -710,7 +671,7 @@ class SimMoveDemo(QMainWindow):
                     self.poeni2 += 20
                     self.progressing(20)
                     self.labelispis.setText(str(self.x) + str(self.poeni1))
-                    self.labelispis2.setText(str(self.y) + str(self.poeni2))
+                    #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
                 if self.DesnaLopticaPogodjena == False:
                     self.labelMalaLopticaDesna.show()
@@ -752,7 +713,7 @@ class SimMoveDemo(QMainWindow):
                 self.poeni2 += 50
                 self.progressing(40)
                 self.labelispis.setText(str(self.x) + str(self.poeni1))
-                self.labelispis2.setText(str(self.y) + str(self.poeni2))
+                #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
 
 
@@ -779,7 +740,7 @@ class SimMoveDemo(QMainWindow):
                 self.poeni2 += 50
                 self.progressing(40)
                 self.labelispis.setText(str(self.x) + str(self.poeni1))
-                self.labelispis2.setText(str(self.y) + str(self.poeni2))
+                #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
     def progressing(self,poeni):
         self.step += poeni
@@ -797,7 +758,7 @@ class SimMoveDemo(QMainWindow):
             self.speed -= 0.02
 
             self.close()
-            self.ex2 = SimMoveDemo(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
+            self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
 
             #oImage = QImage("fantasy_border_" + str(self.pic_no) + ".jpg")
             #palette = QPalette()
@@ -826,7 +787,7 @@ class SimMoveDemo(QMainWindow):
                     self.poeni1 += 20
                     self.progressing(20)
                     self.labelispis.setText(str(self.x) + str(self.poeni1))
-                    self.labelispis2.setText(str(self.y) + str(self.poeni2))
+                    #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
                 if self.DesnaLopticaPogodjena == False:
                     self.labelMalaLopticaDesna.show()
@@ -868,7 +829,7 @@ class SimMoveDemo(QMainWindow):
                 self.poeni1 += 50
                 self.progressing(40)
                 self.labelispis.setText(str(self.x) + str(self.poeni1))
-                self.labelispis2.setText(str(self.y) + str(self.poeni2))
+                #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
 
 
@@ -894,21 +855,5 @@ class SimMoveDemo(QMainWindow):
                 self.poeni1 += 50
                 self.progressing(40)
                 self.labelispis.setText(str(self.x) + str(self.poeni1))
-                self.labelispis2.setText(str(self.y) + str(self.poeni2))
-"""
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    zivot1 = 3
-    zivot2 = 3
-    poeni1 = 0
-    poeni2 = 0
-    level = 1
-    pic_no = 1
-    slika = "fantasy_border_1.jpg"
-    speed = 0.08
+                #self.labelispis2.setText(str(self.y) + str(self.poeni2))
 
-    ex = SimMoveDemo(zivot1, zivot2, poeni1, poeni2, slika, level, pic_no, speed)
-
-    #ex = SimMoveDemo1(zivot1, zivot2, poeni1, poeni2, slika, level, pic_no, speed)
-    sys.exit(app.exec_())
-"""

@@ -7,11 +7,11 @@ class BallMovement(QObject):
 
     ballMovementSignal = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, brzina):
         super().__init__()
 
         self.is_done = False
-
+        self.speed = brzina
         self.thread = QThread()
         # move the Worker object to the Thread object
         # "push" self from the current thread to this thread
@@ -40,4 +40,7 @@ class BallMovement(QObject):
         """
         while not self.is_done:
             self.ballMovementSignal.emit()
-            time.sleep(0.02)
+            if(self.speed < 0.01):
+                time.sleep(0.02)
+            else:
+                time.sleep(self.speed)
