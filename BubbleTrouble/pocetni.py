@@ -5,7 +5,11 @@ from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize, QTimer
 from PyQt5.QtGui import QPixmap, QImage, QPalette, QBrush
 from PyQt5.QtWidgets import QWidget, QLabel, QApplication, QMainWindow, QVBoxLayout, QProgressBar
+<<<<<<< HEAD
 import os
+=======
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 from key_notifier import KeyNotifier
 from ballMovement import BallMovement
 from hitBall import HitBall
@@ -29,6 +33,7 @@ class SimMoveDemo(QMainWindow):
         pix66 = QPixmap('bal2.png')
         pix77 = QPixmap('present.png')
 
+<<<<<<< HEAD
         self.labelStrelica1 = QLabel(self)
         self.labelStrelica2 = QLabel(self)
         self.labelPlayer1 = QLabel(self)
@@ -37,6 +42,16 @@ class SimMoveDemo(QMainWindow):
         self.labelPozadina = QLabel(self)
         self.labelMalaLopticaDesna = QLabel(self)
         self.labelMalaLopticaLeva = QLabel(self)
+=======
+        self.label3 = QLabel(self)
+        self.label4 = QLabel(self)
+        self.label1 = QLabel(self)
+        self.label2 = QLabel(self)
+        self.label5 = QLabel(self)
+        self.label6 = QLabel(self)
+        self.labe21 = QLabel(self)
+        self.labe211 = QLabel(self)
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         self.labelispis = QLabel(self)
         self.labelispis2 = QLabel(self)
 
@@ -53,10 +68,14 @@ class SimMoveDemo(QMainWindow):
         self.timerSleep = QTimer(self)
         self.timerSleep2 = QTimer(self)
 
+<<<<<<< HEAD
         self.timerStrelica1 = QTimer(self)
         self.timerStrelica2 = QTimer(self)
 
         oImage = QImage(slika)
+=======
+        oImage = QImage("fantasy_border.jpg")
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         self.hitFloorVelikaLopta = False
         self.hitSideVelikaLopta = False
@@ -124,9 +143,20 @@ class SimMoveDemo(QMainWindow):
         self.ballMovement4.ballMovementSignal.connect(self.moveBallMalaLopticaLeva)
         self.ballMovement4.start()
         # self.v = QVBoxLayout()
+<<<<<<< HEAD
 
 
     def __init_ui__(self, zivot1, zivot2, poeni1, poeni2, slika, level, pic_no):
+=======
+        self.loptaKlasa = Ball('ball.png', 2, 30, 30)
+        self.AddBall = AddBall()
+        self.AddBall.add_ball(self.loptaKlasa)
+        self.AddBall.ball_signal.connect(self.postaviLoptu)
+        self.ballMovement2 = BallMovement()
+        self.ballMovement2.ballMovementSignal.connect(self.loptaKlasa.moveBall)
+
+    def __init_ui__(self):
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         self.setWindowIcon(QtGui.QIcon('download.png'))
         self.setWindowTitle('BubbleTrouble')
         font = QtGui.QFont()
@@ -139,6 +169,20 @@ class SimMoveDemo(QMainWindow):
 
         self.timerP1.start(20000)
         self.timerP1.timeout.connect(self.timer_func)
+<<<<<<< HEAD
+=======
+
+        """"    OVO je za sad jedini nacin da se lopta pojavila 
+        self.lopta = QLabel(self)
+        Lopta = Ball('ball.png', 2, 100, 100)
+        Lopta.setSize(80, 80)
+        #self.lopta.showBall()
+        self.lopta = Lopta.labelBall
+        self.setCentralWidget(Lopta.labelBall)
+
+        KORDINATE KRETANJA LOPTE TREBA POPRAVITI
+        """
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         self.labelispis.setFont(font)
         self.labelispis.resize(100000, 100)
@@ -157,6 +201,16 @@ class SimMoveDemo(QMainWindow):
         self.labelLives2.setGeometry(1550, 880, 400, 200)
 
         self.pbar.setGeometry(500, 960, 1000, 40)
+<<<<<<< HEAD
+=======
+
+        self.labellevel.setFont(font)
+        self.labellevel.resize(100000, 100)
+        self.labellevel.setGeometry(870, 940, 400, 200)
+
+        self.label1.setPixmap(self.pix1)
+        self.label1.setGeometry(1000, 900, 50, 50)
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         self.labellevel.setFont(font)
         self.labellevel.resize(100000, 100)
@@ -165,16 +219,20 @@ class SimMoveDemo(QMainWindow):
         self.labelPlayer1.setPixmap(self.pix1)
         self.labelPlayer1.setGeometry(1000, 900, 50, 50)
 
+<<<<<<< HEAD
         self.labelPlayer2.setPixmap(self.pix2)
         self.labelPlayer2.setGeometry(900, 900, 50, 50)
 
         self.labelVelikaLopta.setPixmap(self.pix5)
         self.labelVelikaLopta.setGeometry(50, 50, 50, 50)
 
+=======
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         self.labelforce.setPixmap(self.pix7)
         self.labelforce.setGeometry(-100, 0, 0, 0)
         self.labelforce.hide()
 
+<<<<<<< HEAD
 
         self.labelMalaLopticaDesna.setPixmap(self.pix6)
         self.labelMalaLopticaDesna.setGeometry(50, 50, 50, 50)
@@ -183,6 +241,17 @@ class SimMoveDemo(QMainWindow):
         self.labelMalaLopticaLeva.setGeometry(50, 50, 50, 50)
         self.labelMalaLopticaLeva.hide()
         self.labelStrelica1.resize(8, 950)
+=======
+        print("napravljena labela ubacena slika")
+
+        self.labe21.setPixmap(self.pix6)
+        self.labe21.setGeometry(50, 50, 50, 50)
+        self.labe21.hide()
+        self.labe211.setPixmap(self.pix6)
+        self.labe211.setGeometry(50, 50, 50, 50)
+        self.labe211.hide()
+        self.label3.resize(8, 950)
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         pixmap1 = QtGui.QPixmap('arrow.png')
         self.pixmap = pixmap1.scaled(8, 950)
         self.labelStrelica1.setPixmap(self.pixmap)
@@ -202,6 +271,7 @@ class SimMoveDemo(QMainWindow):
 
         self.x = 'Player1:'
         self.y = 'Player2:'
+<<<<<<< HEAD
 
         self.lives1 = 3
         self.lives2 = 2
@@ -211,6 +281,24 @@ class SimMoveDemo(QMainWindow):
         self.lev = 'Level:'
 
         self.step = 0
+=======
+        self.score1 = 999999
+        self.score2 = 999999
+        self.lives1 = 3
+        self.lives2 = 2
+
+        self.lev = 'Level:'
+        self.level_no = 1
+
+        self.step = 0
+
+        self.statusBar().setFont(font)
+        self.labelispis.setText(str(self.x) + str(self.score1))
+        self.labelispis2.setText(str(self.y) + str(self.score2))
+        self.labellevel.setText(str(self.lev) + str(self.level_no))
+        self.labelLives1.setText("Lives:" + str(self.lives1))
+        self.labelLives2.setText("Lives:" + str(self.lives2))
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         self.statusBar().setFont(font)
         self.labelispis.setText(str(self.x) + str(self.poeni1))
@@ -228,14 +316,23 @@ class SimMoveDemo(QMainWindow):
         self.key_notifier.rem_key(event.key())
 
     def __update_position__(self, key):
+<<<<<<< HEAD
         rec1 = self.labelPlayer1.geometry()
         rec2 = self.labelPlayer2.geometry()
+=======
+        rec1 = self.label1.geometry()
+        rec2 = self.label2.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         # rec3 = self.label3.geometry()
         # rec4 = self.label4.geometry()
 
         if key == Qt.Key_Right:
             if rec1.x() < 1880:
+<<<<<<< HEAD
                 self.labelPlayer1.setGeometry(rec1.x() + self.p1_speed, rec1.y(), rec1.width(), rec1.height())
+=======
+                self.label1.setGeometry(rec1.x() + self.p1_speed, rec1.y(), rec1.width(), rec1.height())
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
                 self.checkForceHitFromLeft1()
         elif key == Qt.Key_Up:
             if self.arr1hidden:
@@ -251,11 +348,19 @@ class SimMoveDemo(QMainWindow):
 
         elif key == Qt.Key_Left:
             if rec1.x() > 15:
+<<<<<<< HEAD
                 self.labelPlayer1.setGeometry(rec1.x() - self.p1_speed, rec1.y(), rec1.width(), rec1.height())
                 self.checkForceHitFromRight1()
         if key == Qt.Key_D:
             if rec2.x() < 1880:
                 self.labelPlayer2.setGeometry(rec2.x() + self.p2_speed, rec2.y(), rec2.width(), rec2.height())
+=======
+                self.label1.setGeometry(rec1.x() - self.p1_speed, rec1.y(), rec1.width(), rec1.height())
+                self.checkForceHitFromRight1()
+        if key == Qt.Key_D:
+            if rec2.x() < 1880:
+                self.label2.setGeometry(rec2.x() + self.p2_speed, rec2.y(), rec2.width(), rec2.height())
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
                 self.checkForceHitFromLeft2()
         elif key == Qt.Key_W:
             if self.arr2hidden:
@@ -270,6 +375,7 @@ class SimMoveDemo(QMainWindow):
                 self.arrowMovement2.start()
         elif key == Qt.Key_A:
             if rec2.x() > 15:
+<<<<<<< HEAD
                 self.labelPlayer2.setGeometry(rec2.x() - self.p2_speed, rec2.y(), rec2.width(), rec2.height())
                 self.checkForceHitFromRight2()
         elif key == Qt.Key_Escape:
@@ -279,6 +385,17 @@ class SimMoveDemo(QMainWindow):
         rec5 = self.labelVelikaLopta.geometry()
         igrac1 = self.labelPlayer1.geometry()
         igrac2 = self.labelPlayer2.geometry()
+=======
+                self.label2.setGeometry(rec2.x() - self.p2_speed, rec2.y(), rec2.width(), rec2.height())
+                self.checkForceHitFromRight2()
+        elif key == Qt.Key_Escape:
+            self.close()
+        elif key == Qt.Key_K:
+            self.progressing()
+
+    def moveBall(self):
+        rec5 = self.label5.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         if (rec5.y() == 900):
             self.hitFloorVelikaLopta = True
         elif (rec5.y() == 0):
@@ -500,19 +617,40 @@ class SimMoveDemo(QMainWindow):
             self.arrowMovement2.ballY.append(890)
             self.arrowMovement2.ballY.append(0)
             self.arrowMovement2.ballY.append(broj2 - self.arr2h)
+<<<<<<< HEAD
             self.labelStrelica2.setGeometry(broj1 + 15, broj2 - self.arr2h, rec9.width(), rec9.height())
             if not self.labelVelikaLopta.isHidden():
                 self.hitBall = HitBall()
                 self.hitBall.hitBallSignal.connect(self.checkHitVelikaLoptaPlayer2)
                 self.hitBall.start()
+=======
+            self.label4.setGeometry(broj1 + 15, broj2 - self.arr2h, rec3.width(), rec3.height())
+            if not self.label5.isHidden():
+                self.hitBall = HitBall()
+                self.hitBall.hitBallSignal.connect(self.checkHit2)
+                self.hitBall.start()
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
             else:
                 self.hitBall2 = HitBall()
                 self.hitBall2.hitBallSignal.connect(self.checkHitMalaLopticaDesna)
                 self.hitBall2.start()
 
+<<<<<<< HEAD
                 self.hitBall22 = HitBall()
                 self.hitBall22.hitBallSignal.connect(self.checkHitMalaLopticaLeva)
                 self.hitBall22.start()
+=======
+                self.hitBall2 = HitBall()
+                self.hitBall2.hitBallSignal.connect(self.checkHit22)
+                self.hitBall2.start()
+
+                self.hitBall22 = HitBall()
+                self.hitBall22.hitBallSignal.connect(self.checkHit222)
+                self.hitBall22.start()
+
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         else:
             self.hideArrow2()
             self.arrowMovement2.ballX = None
@@ -558,9 +696,14 @@ class SimMoveDemo(QMainWindow):
         self.labelforce.hide()
         self.labelforce.destroy()
 
+<<<<<<< HEAD
 
     def checkForceHitFromLeft1(self):
         player1_position = self.labelPlayer1.geometry()
+=======
+    def checkForceHitFromLeft1(self):
+        player1_position = self.label1.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         force = self.labelforce.geometry()
         ran = random.randint(0, 1)
         if player1_position.x() + 34 >= force.x() and player1_position.x() <= force.x():
@@ -575,7 +718,11 @@ class SimMoveDemo(QMainWindow):
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromRight1(self):
+<<<<<<< HEAD
         player1_position = self.labelPlayer1.geometry()
+=======
+        player1_position = self.label1.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         force = self.labelforce.geometry()
         ran = random.randint(0, 1)
         if player1_position.x() <= force.x() + 34 and player1_position.x() >= force.x():
@@ -590,7 +737,11 @@ class SimMoveDemo(QMainWindow):
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromLeft2(self):
+<<<<<<< HEAD
         player2_position = self.labelPlayer2.geometry()
+=======
+        player2_position = self.label2.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         force = self.labelforce.geometry()
         ran = random.randint(0, 1)
         if player2_position.x() + 34 >= force.x() and player2_position.x() <= force.x():
@@ -605,7 +756,11 @@ class SimMoveDemo(QMainWindow):
             self.timerSleep2.timeout.connect(self.p2_normal_speed)
 
     def checkForceHitFromRight2(self):
+<<<<<<< HEAD
         player2_position = self.labelPlayer2.geometry()
+=======
+        player2_position = self.label2.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
         force = self.labelforce.geometry()
         ran = random.randint(0, 1)
 
@@ -634,12 +789,18 @@ class SimMoveDemo(QMainWindow):
             self.ballMovement.is_done = True
             self.ballMovement.die()
 
+<<<<<<< HEAD
     def checkHitVelikaLoptaPlayer2(self):
         ballPosition = self.labelVelikaLopta.geometry()
+=======
+    def checkHit2(self):
+        ballPosition = self.label5.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         if ballPosition.x() == self.arrowMovement2.ballX or ballPosition.x() + 1 == self.arrowMovement2.ballX or ballPosition.x() + 2 == self.arrowMovement2.ballX or ballPosition.x() + 3 == self.arrowMovement2.ballX or ballPosition.x() + 4 == self.arrowMovement2.ballX or ballPosition.x() + 5 == self.arrowMovement2.ballX or ballPosition.x() + 6 == self.arrowMovement2.ballX or ballPosition.x() + 7 == self.arrowMovement2.ballX or ballPosition.x() + 8 == self.arrowMovement2.ballX:
             if ballPosition.y() in self.arrowMovement2.ballY or ballPosition.y() + 1 in self.arrowMovement2.ballY or ballPosition.y() + 2 in self.arrowMovement2.ballY or ballPosition.y() + 3 in self.arrowMovement2.ballY or ballPosition.y() + 4 in self.arrowMovement2.ballY or ballPosition.y() + 5 in self.arrowMovement2.ballY or ballPosition.y() + 6 in self.arrowMovement2.ballY or ballPosition.y() + 7 in self.arrowMovement2.ballY or ballPosition.y() + 8 in self.arrowMovement2.ballY:
                 # self.arrowMovement2.ballY = []
+<<<<<<< HEAD
 
 
                 if self.VelikaLoptaPogodjena == False:
@@ -666,24 +827,58 @@ class SimMoveDemo(QMainWindow):
                     self.LevaLopticaPostoji = True
 
                 self.labelStrelica2.hide()
+=======
+                self.label5.hide()
+                self.label5.destroy()
+                if self.da == False:
+                    self.labe21.setGeometry(ballPosition.x() + 10, ballPosition.y(), 100, 100)
+                    self.labe211.setGeometry(ballPosition.x() - 100, ballPosition.y(), 100, 100)
+                    self.hitFloor3 = False
+                    self.hitSide3 = False
+                    self.hitFloor2 = False
+                    self.hitSide2 = False
+                    self.da = True
+                if self.bol == False:
+                    self.labe21.show()
+
+                if self.bol2 == False:
+                    self.labe211.show()
+
+                self.label4.hide()
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
                 self.arr2hidden = True
                 self.arr2h = 10
                 self.arrowMovement2.is_done = True
                 self.arrowMovement2.die()
 
+<<<<<<< HEAD
                 self.ballMovement.is_done = True
                 self.ballMovement.die()
 
     def checkHitMalaLopticaDesna(self):
         ballPosition = self.labelMalaLopticaDesna.geometry()
+=======
+    def checkHit22(self):
+        ballPosition = self.labe21.geometry()
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
         if ballPosition.x() == self.arrowMovement2.ballX or ballPosition.x() + 1 == self.arrowMovement2.ballX or ballPosition.x() + 2 == self.arrowMovement2.ballX or ballPosition.x() + 3 == self.arrowMovement2.ballX or ballPosition.x() + 4 == self.arrowMovement2.ballX or ballPosition.x() + 5 == self.arrowMovement2.ballX or ballPosition.x() + 6 == self.arrowMovement2.ballX or ballPosition.x() + 7 == self.arrowMovement2.ballX or ballPosition.x() + 8 == self.arrowMovement2.ballX:
             if ballPosition.y() in self.arrowMovement2.ballY or ballPosition.y() + 1 in self.arrowMovement2.ballY or ballPosition.y() + 2 in self.arrowMovement2.ballY or ballPosition.y() + 3 in self.arrowMovement2.ballY or ballPosition.y() + 4 in self.arrowMovement2.ballY or ballPosition.y() + 5 in self.arrowMovement2.ballY or ballPosition.y() + 6 in self.arrowMovement2.ballY or ballPosition.y() + 7 in self.arrowMovement2.ballY or ballPosition.y() + 8 in self.arrowMovement2.ballY:
                 # self.arrowMovement2.ballY = []
+<<<<<<< HEAD
                 self.labelMalaLopticaDesna.hide()
                 self.labelMalaLopticaDesna.setGeometry(-500, -500, 0, 0)
                 self.DesnaLopticaPogodjena = True
                 self.labelStrelica2.hide()
+=======
+                self.labe21.hide()
+                self.labe21.destroy()
+                self.bol = True
+
+                self.label4.hide()
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
                 self.arr2hidden = True
                 self.arr2h = 10
                 self.arrowMovement2.is_done = True
@@ -701,6 +896,7 @@ class SimMoveDemo(QMainWindow):
 
 
 
+<<<<<<< HEAD
     def checkHitMalaLopticaLeva(self):
         ballPosition = self.labelMalaLopticaLeva.geometry()
 
@@ -711,6 +907,8 @@ class SimMoveDemo(QMainWindow):
                 self.labelMalaLopticaLeva.setGeometry(-500, -500, 0, 0)
                 self.LevaLopticaPogodjena = True
                 self.labelStrelica2.hide()
+=======
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
                 self.arr2hidden = True
                 self.arr2h = 10
                 self.arrowMovement2.is_done = True
@@ -758,6 +956,7 @@ class SimMoveDemo(QMainWindow):
                 # self.arrowMovement2.ballY = []
 
 
+<<<<<<< HEAD
                 if self.VelikaLoptaPogodjena == False:
                     self.labelMalaLopticaDesna.setGeometry(ballPosition.x() + 10, ballPosition.y(), 100, 100)
                     self.labelMalaLopticaLeva.setGeometry(ballPosition.x() - 100, ballPosition.y(), 100, 100)
@@ -841,6 +1040,24 @@ class SimMoveDemo(QMainWindow):
                 self.progressing(40)
                 self.labelispis.setText(str(self.x) + str(self.poeni1))
                 self.labelispis2.setText(str(self.y) + str(self.poeni2))
+=======
+    def postaviLoptu(self, b):
+        self.setCentralWidget(b)
+        # self.v.addWidget(b)
+        self.AddBall.is_done = True
+        self.AddBall.die()
+        # self.b.move(500, 100)
+
+    def progressing(self):
+        self.step += 1
+        self.pbar.setValue(self.step)
+        if self.step == 100:
+            self.level_no += 1
+            self.step = 0
+            self.pbar.setValue(self.step)
+            self.labellevel.setText(str(self.lev) + str(self.level_no))
+
+>>>>>>> e39e4c1c8aa684a75c8199e78325c28f27deaad8
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
