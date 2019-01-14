@@ -1,6 +1,7 @@
 import sys
 import random
 
+from  multiprocessing import Queue, Process
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize, QTimer
 from PyQt5.QtGui import QPixmap, QImage, QPalette, QBrush
@@ -13,6 +14,7 @@ from arrowMovement import ArrowMovement
 from ball import Ball
 from addBall import AddBall
 from single_player import SimMoveDemo1
+from checkLives import funkcija
 
 bolian = False
 
@@ -126,6 +128,10 @@ class SimMoveDemo(QMainWindow):
         self.ballMovement4.start()
         # self.v = QVBoxLayout()
 
+        self.queue = Queue()
+
+        self.process = Process(target=funkcija,args=[self.queue])
+        self.process.start()
 
     def __init_ui__(self, zivot1, zivot2, poeni1, poeni2, slika, level, pic_no, speed):
         self.setWindowIcon(QtGui.QIcon('download.png'))
@@ -603,7 +609,7 @@ class SimMoveDemo(QMainWindow):
         self.arrowMovement.die()
 
     def timer_func(self):
-        x = random.randint(0, 1880)
+        x = self.queue.get()
         self.labelforce.setGeometry(x, 828, 400, 200)
         self.labelforce.show()
         self.timerP2.start(2000)

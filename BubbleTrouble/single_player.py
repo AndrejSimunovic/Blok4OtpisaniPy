@@ -138,7 +138,7 @@ class SimMoveDemo1(QMainWindow):
         self.zivot2 = zivot2
         self.speed = speed
 
-        self.timerP1.start(20000)
+        self.timerP1.start(5000)
         self.timerP1.timeout.connect(self.timer_func)
 
         self.labelispis.setFont(font)
@@ -298,16 +298,23 @@ class SimMoveDemo1(QMainWindow):
                     self.ballMovement.die()
                     self.ballMovement3.die()
                     self.ballMovement4.die()
+
+                    #self.key_notifier.die()
+
+                    #self.close()
                     self.pbar.setValue(0)
+
                     if (self.zivot1 == 0):
                         self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                         self.labelPlayer2.setGeometry(-900, -900, 0, 0)
                         self.labelVelikaLopta.hide()
                         self.labelforce.hide()
                         self.zivot1 = 'LOSER'
+                        self.zivot2 = 'WINNER'
                     else:
                         self.close()
                         self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
+                        # self.labelLives1.setText('Lives: ' + str(self.zivot2))
 
             if igrac2.x() + i == rec5.x():
                 if rec5.y() > 860 and rec5.y() < 900:
@@ -358,16 +365,21 @@ class SimMoveDemo1(QMainWindow):
                         self.ballMovement3.die()
                         self.ballMovement4.die()
 
+                        #self.key_notifier.die()
+                        #self.close()
                         self.pbar.setValue(0)
                         if (self.zivot1 == 0):
                             self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                             self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelVelikaLopta.hide()
+                            self.labelMalaLopticaDesna.hide()
+                            self.labelMalaLopticaLeva.hide()
                             self.labelforce.hide()
                             self.zivot1 = 'LOSER'
+                            self.zivot2 = 'WINNER'
                         else:
                             self.close()
                             self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
+                            # elf.labelLives2.setText('Lives: ' + str(self.zivot2))
 
                 if igrac2.x() + i == rec9.x():
                     if rec9.y() > 860 and rec9.y() < 900:
@@ -420,16 +432,21 @@ class SimMoveDemo1(QMainWindow):
                         self.ballMovement3.die()
                         self.ballMovement4.die()
 
+                        #self.key_notifier.die()
+                        #self.close()
                         self.pbar.setValue(0)
                         if (self.zivot1 == 0):
                             self.labelPlayer1.setGeometry(-900, -900, 0, 0)
                             self.labelPlayer2.setGeometry(-900, -900, 0, 0)
-                            self.labelVelikaLopta.hide()
+                            self.labelMalaLopticaDesna.hide()
+                            self.labelMalaLopticaLeva.hide()
                             self.labelforce.hide()
                             self.zivot1 = 'LOSER'
+                            self.zivot2 = 'WINNER'
                         else:
                             self.close()
                             self.ex2 = SimMoveDemo1(self.zivot1, self.zivot2, self.poeni1, self.poeni2, self.slika, self.level, self.pic_no, self.speed)
+                            # self.labelLives2.setText('Lives: ' + str(self.zivot2))
 
                 if igrac2.x() + i == rec6.x():
                     if rec6.y() > 860 and rec6.y() < 900:
@@ -567,7 +584,7 @@ class SimMoveDemo1(QMainWindow):
         x = random.randint(0, 1880)
         self.labelforce.setGeometry(x, 828, 400, 200)
         self.labelforce.show()
-        self.timerP2.start(10000)
+        self.timerP2.start(2000)
         self.timerP2.timeout.connect(self.hide_force)
 
     def hide_force(self):
@@ -587,7 +604,7 @@ class SimMoveDemo1(QMainWindow):
                 self.p1_speed = 25
             else:
                 self.p1_speed = 5
-            self.timerSleep.start(10000)
+            self.timerSleep.start(2000)
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromRight1(self):
@@ -602,7 +619,7 @@ class SimMoveDemo1(QMainWindow):
                 self.p1_speed = 25
             else:
                 self.p1_speed = 5
-            self.timerSleep.start(10000)
+            self.timerSleep.start(2000)
             self.timerSleep.timeout.connect(self.p1_normal_speed)
 
     def checkForceHitFromLeft2(self):
@@ -617,7 +634,7 @@ class SimMoveDemo1(QMainWindow):
                 self.p2_speed = 25
             else:
                 self.p2_speed = 5
-            self.timerSleep2.start(10000)
+            self.timerSleep2.start(2000)
             self.timerSleep2.timeout.connect(self.p2_normal_speed)
 
     def checkForceHitFromRight2(self):
@@ -633,7 +650,7 @@ class SimMoveDemo1(QMainWindow):
                 self.p2_speed = 25
             else:
                 self.p2_speed = 5
-            self.timerSleep2.start(10000)
+            self.timerSleep2.start(2000)
             self.timerSleep2.timeout.connect(self.p2_normal_speed)
 
     def p1_normal_speed(self):
